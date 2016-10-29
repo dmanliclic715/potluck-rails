@@ -4,6 +4,10 @@ User.delete_all
 Potluck.delete_all
 Attendance.delete_all
 
+ActiveRecord::Base.connection.tables.each do |t|
+  ActiveRecord::Base.connection.reset_pk_sequence!(t)
+end
+
 20.times do
   User.create(email: Faker::Internet.free_email, username: Faker::Name.first_name, password: "password")
 end
