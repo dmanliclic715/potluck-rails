@@ -1,0 +1,18 @@
+<h1>Potlucks</h1>
+<table>
+  <tr>
+    <th>Potluck Event</th>
+    <th>Location</th>
+  </tr>
+
+  <% @potlucks.each do |potluck| %>
+    <tr>
+      <td><%=  potluck.name %></td>
+      <td><%= potluck.location %></td>
+      <td><%= potluck.time %></td>
+      <td><%= link_to 'Show', potluck_path(potluck) %></td>
+      <td><%= link_to 'Edit', edit_potluck_path(potluck) %></td>
+      <td><%= link_to 'Destroy', potluck_path(potluck),method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

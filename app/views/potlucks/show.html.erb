@@ -1,0 +1,5 @@
+<h1>Welcome to <%= @potluck.name %>!</h1>
+  <p>Location: <%= @potluck.location %></p>
+  <p>Date: <%= @potluck.time.strftime("%B %d, %Y") %></p>
+  <p>Time: <%= @potluck.time.strftime("%I:%M")%></p>
+  <p>Host: <%= @potluck.host.username %> </p>
