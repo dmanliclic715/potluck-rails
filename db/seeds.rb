@@ -9,7 +9,7 @@ ActiveRecord::Base.connection.tables.each do |t|
 end
 
 20.times do
-  User.create(email: Faker::Internet.free_email, username: Faker::Name.first_name, password: "password")
+  User.create(email: Faker::Internet.free_email, password: "password")
 end
 
 20.times do

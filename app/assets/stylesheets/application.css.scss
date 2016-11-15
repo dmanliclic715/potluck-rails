@@ -1,0 +1,41 @@
+@import "bootstrap";
+
+.btn-primary {
+  background-color: #373A3C;
+  border-color: #373A3C;
+}
+
+.pull-right {
+  float: right;
+}
+
+.navbar-brand {
+  transform: translateX(-50%);
+   left: 50%;
+   position: absolute;
+}
+
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+.col-fixed {
+    /* custom width */
+    width:320px;
+}
+.col-min {
+    /* custom min width */
+    min-width:320px;
+}
+.col-max {
+    /* custom max width */
+    max-width:320px;
+}

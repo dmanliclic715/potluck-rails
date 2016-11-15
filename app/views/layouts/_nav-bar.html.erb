@@ -1,0 +1,23 @@
+<nav class="navbar navbar-dark bg-inverse">
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>
+  <div class="collapse navbar-toggleable-xs" id="navbar-header">
+    <a class="navbar-brand" href="/">Potlucks</a>
+    <ul class="nav navbar-nav pull-right">
+      <% if user_signed_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="http://example.com" id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= current_user.email %></a>
+            <div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
+            <%= link_to "Sign Out", destroy_user_session_path, class: "dropdown-item", method: "DELETE"%>
+            </div>
+        </li>
+       <% else %>
+       <li class="nav-item">
+         <%= link_to new_user_session_path, class: "nav-link"  do %>
+         Sign In
+         <span class="sr-only">(current)</span>
+         <% end %>
+       </li>
+      <% end %>
+    </ul>
+  </div>
+</nav> <!-- /navbar -->

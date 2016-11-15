@@ -1,18 +1,72 @@
-<h1>Potlucks</h1>
-<table>
-  <tr>
-    <th>Potluck Event</th>
-    <th>Location</th>
-  </tr>
-
-  <% @potlucks.each do |potluck| %>
-    <tr>
-      <td><%=  potluck.name %></td>
-      <td><%= potluck.location %></td>
-      <td><%= potluck.time %></td>
-      <td><%= link_to 'Show', potluck_path(potluck) %></td>
-      <td><%= link_to 'Edit', edit_potluck_path(potluck) %></td>
-      <td><%= link_to 'Destroy', potluck_path(potluck),method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+<% if @potluck %>
+  <% if @potluck.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@potluck.errors.count, "error") %> prohibited this article from being saved:</h2>
+        <ul>
+          <%= @potluck.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+    </div>
   <% end %>
-</table>
+<% end %>
+<h1>Potlucks</h1>
+  <table>
+    <tr>
+      <th>Potluck Event</th>
+      <th>Location</th><br>
+      <th>Time</th>
+    </tr>
+
+    <% @potlucks.each do |potluck| %>
+      <tr>
+        <td><%=  potluck.name %></td>
+        <td><%= potluck.location %></td>
+        <td></td>
+        <td><%= potluck.time %></td>
+        <td></td>
+        <td></td>
+        <td><%= link_to 'Show', potluck_path(potluck) %></td>
+        <% if current_user %>
+          <% if current_user.id == potluck.user_id %>
+            <td><%= link_to 'Edit', edit_potluck_path(potluck) %></td>
+            <td><%= link_to 'Destroy', potluck_path(potluck),method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <% if user_signed_in? %>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary btn-sml" data-toggle="modal" data-target="#myModal">
+    Host A Potluck
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Host A Potluck<h4>
+        </div>
+        <div class="modal-body">
+          <%= form_for :potluck,url: potlucks_path, method: "POST" do |f| %>
+            <%= f.label :name %>
+            <%= f.text_field :name %><br>
+            <%= f.label :location %>
+            <%= f.text_field :location %><br>
+            <%= f.label :time %>
+            <%= f.text_field :time %> (YYYY-MM-DD HH:MM)
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "Create Potluck", class: "btn btn-secondary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
