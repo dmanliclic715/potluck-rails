@@ -31,7 +31,6 @@ gem 'faker'
 
 gem 'devise'
 gem 'bootstrap', '~> 4.0.0.alpha5'
-gem 'devise-bootstrapped', github: 'king601/devise-bootstrapped'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

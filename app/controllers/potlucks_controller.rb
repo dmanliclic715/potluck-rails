@@ -7,12 +7,12 @@ class PotlucksController < ApplicationController
 
   def create
     @potluck = Potluck.new(potluck_params)
+    puts "!!!!!!!!!!!!!!!!!!#{@potluck.time}!!!!!!!!!!!!!!!!!!!!"
     @potluck.user_id = current_user.id
     if @potluck.save
-      puts "I GOT HERERERAERAERAERAS"
       redirect_to root_path
     else
-      puts "FADFADSFASDFUASDFUASDUFASUDF"
+      p @potluck.time
       @potlucks = Potluck.order(time: :desc)
       render "index"
     end
