@@ -1,5 +1,5 @@
 class PotlucksController < ApplicationController
-  before_action :authenticate_user!, only: [:destroy]
+  before_action :authenticate_user!, only: [:destroy,:edit]
 
   def index
     @potlucks = Potluck.order(time: :desc)
@@ -7,7 +7,6 @@ class PotlucksController < ApplicationController
 
   def create
     @potluck = Potluck.new(potluck_params)
-    puts "!!!!!!!!!!!!!!!!!!#{@potluck.time}!!!!!!!!!!!!!!!!!!!!"
     @potluck.user_id = current_user.id
     if @potluck.save
       redirect_to root_path
@@ -22,6 +21,8 @@ class PotlucksController < ApplicationController
   end
 
   def edit
+    @potluck = Potluck.find(params[:id])
+    authorize_user(@potluck)
   end
 
   def show
@@ -29,6 +30,12 @@ class PotlucksController < ApplicationController
   end
 
   def update
+    @potluck = Potluck.find(params[:id])
+    if @potluck.update(potluck_params)
+      redirect_to root_path
+    else
+      render "edit"
+    end
   end
 
   def destroy
@@ -39,5 +46,11 @@ class PotlucksController < ApplicationController
   private
     def potluck_params
       params.require(:potluck).permit(:name, :location, :time, :user_id)
+    end
+
+    def authorize_user(obj)
+      if current_user.id != obj.user_id
+        redirect_to "https://www.youtube.com/watch?v=otCpCn0l4Wo", alert: "Can't do that"
+      end
     end
 end

@@ -1,0 +1,10 @@
+<h1>Edit Potluck</h1>
+<%= form_for @potluck,url: potluck_path, method: "PATCH" do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+  <%= f.label :location %>
+  <%= f.text_field :location %><br>
+  <%= f.label :time %>
+  <%= f.datetime_field :time %><br>
+  <%= f.submit "Update" %>
+<% end %>

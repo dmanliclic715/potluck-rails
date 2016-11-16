@@ -22,10 +22,7 @@
       <tr>
         <td><%=  potluck.name %></td>
         <td><%= potluck.location %></td>
-        <td></td>
         <td><%= potluck.time %></td>
-        <td></td>
-        <td></td>
         <td><%= link_to 'Show', potluck_path(potluck) %></td>
         <% if current_user %>
           <% if current_user.id == potluck.user_id %>
