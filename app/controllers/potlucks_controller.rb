@@ -1,8 +1,9 @@
+require 'date'
 class PotlucksController < ApplicationController
   before_action :authenticate_user!, only: [:destroy,:edit]
 
   def index
-    @potlucks = Potluck.order(time: :desc)
+    @potlucks = Potluck.where("time > ?",DateTime.now).order(time: :desc)
   end
 
   def create
@@ -11,7 +12,6 @@ class PotlucksController < ApplicationController
     if @potluck.save
       redirect_to root_path
     else
-      p @potluck.time
       @potlucks = Potluck.order(time: :desc)
       render "index"
     end
