@@ -11,6 +11,11 @@
   <% end %>
 <% end %>
 <h1>Potlucks</h1>
+<% if user_signed_in? %>
+<button type="button" class="btn btn-primary btn-sml space" data-toggle="modal" data-target="#myModal">
+  Host A Potluck
+</button>
+<% end %>
   <table>
     <tr>
       <th>Potluck Event</th>
@@ -22,7 +27,7 @@
       <tr>
         <td><%=  potluck.name %></td>
         <td><%= potluck.location %></td>
-        <td><%= potluck.time %></td>
+        <td><%= potluck.time.strftime("%a, %B %e %Y %m:%M%p ") %></td>
         <td><%= link_to 'Show', potluck_path(potluck) %></td>
         <% if current_user %>
           <% if current_user.id == potluck.user_id %>
@@ -35,7 +40,7 @@
   </table>
   <% if user_signed_in? %>
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary btn-sml" data-toggle="modal" data-target="#myModal">
+  <button type="button" class="btn btn-primary btn-sml space" data-toggle="modal" data-target="#myModal">
     Host A Potluck
   </button>
 
